@@ -1,10 +1,12 @@
 <template>
   <div>
-    <v-data-table
-      :headers="headers"
-      :items="moneyData"
-      hide-default-footer
-    ></v-data-table>
+    <v-data-table :headers="headers" :items="moneyData" hide-default-footer>
+      <template v-slot:[`item.type`]="{ item }">
+        <v-chip :color="getColor(item.type)" dark>
+          {{ item.type }}
+        </v-chip>
+      </template>
+    </v-data-table>
     <div>
       <label>Balance: {{ balance }}</label>
     </div>
@@ -57,6 +59,10 @@ export default {
         return sum - money.amount;
       }, 0);
       this.balance = total;
+    },
+    getColor(type) {
+      if (type === "Expense") return "red";
+      return "green";
     },
   },
 };
