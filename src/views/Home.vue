@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Ledger Account</h1>
     <ledger-form></ledger-form>
     <ledger-list></ledger-list>
   </div>
