@@ -110,4 +110,11 @@ p.test {
 .v-text-field {
   width: 250px;
 }
+select {
+  width: 270px;
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+    no-repeat #ddd;
+  background-position: center right;
+  background-position-x: 245px;
+}
 </style>
