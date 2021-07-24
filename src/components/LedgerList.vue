@@ -1,15 +1,22 @@
 <template>
   <div>
-    <v-data-table :headers="headers" :items="moneyData" hide-default-footer>
+    <v-data-table
+      class="grey lighten-5"
+      :headers="headers"
+      :items="moneyData"
+      hide-default-footer
+    >
       <template v-slot:[`item.type`]="{ item }">
         <v-chip :color="getColor(item.type)" dark>
           {{ item.type }}
         </v-chip>
       </template>
     </v-data-table>
-    <div>
-      <label>Balance: {{ this.balance }}</label>
-    </div>
+    <v-card class="d-inline-flex pl-2 pr-2" outlined tile>
+      <div>
+        <label>Balance: {{ this.balance }}</label>
+      </div>
+    </v-card>
     <chart :income="totalIncome" :expense="totalExpense"></chart>
   </div>
 </template>

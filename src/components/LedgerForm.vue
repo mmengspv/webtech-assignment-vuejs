@@ -96,8 +96,13 @@ div {
   border-width: 1px;
   border-style: solid;
   border-color: black;
+  border-radius: 5px;
   margin: 5px;
   padding: 5px;
+}
+
+label {
+  font-size: 1.15em;
 }
 p.test {
   font-weight: bold;
