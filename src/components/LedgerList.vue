@@ -8,7 +8,7 @@
       </template>
     </v-data-table>
     <div>
-      <label>Balance: {{ balance }}</label>
+      <label>Balance: {{ this.balance }}</label>
     </div>
     <chart :income="totalIncome" :expense="totalExpense"></chart>
   </div>
@@ -29,10 +29,10 @@ export default {
           sortable: false,
           value: "name",
         },
-        { text: "Amount", value: "amount" },
-        { text: "Type", value: "type" },
-        { text: "Description", value: "description" },
         { text: "Date", value: "date" },
+        { text: "Type", value: "type" },
+        { text: "Amount", value: "amount" },
+        { text: "Description", value: "description" },
       ],
       moneyData: [],
       balance: 0,
@@ -42,28 +42,39 @@ export default {
   },
   created() {
     this.fetchData();
-    this.calMoney();
   },
   methods: {
     fetchData() {
       LedgerStore.dispatch("fetchMoneyData");
       this.moneyData = LedgerStore.getters.moneyData;
+      console.log(this.moneyData);
+      this.calMoney();
     },
     calMoney() {
-      const total = this.moneyData.reduce((sum, money) => {
+      this.balance = 0;
+      this.totalIncome = 0;
+      this.totalExpense = 0;
+      console.log(this.balance);
+      this.moneyData.forEach((money) => {
         if (money.type === "Income") {
-          this.totalIncome += money.amount;
-          return sum + money.amount;
+          this.totalIncome += Number(money.amount);
+        } else {
+          this.totalExpense += Number(money.amount);
         }
-        this.totalExpense += money.amount;
-        return sum - money.amount;
-      }, 0);
-      this.balance = total;
+      });
+      console.log("do calculate");
+      this.balance = this.totalIncome - this.totalExpense;
+      console.log(this.balance);
+      console.log(this.totalIncome);
+      console.log(this.totalExpense);
     },
     getColor(type) {
       if (type === "Expense") return "red";
       return "green";
     },
+  },
+  beforeUpdate() {
+    this.calMoney();
   },
 };
 </script>

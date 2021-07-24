@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "name": "Jackpot",
+      "amount": 300,
+      "type": "Income",
+      "description": "",
+      "date": "2021-07-22"
+    },
+    {
+      "name": "eating",
+      "amount": 100,
+      "type": "Expense",
+      "description": "eating breakfast",
+      "date": "2021-07-22"
+    },
+    {
+      "name": "Travel",
+      "amount": 100,
+      "type": "Expense",
+      "description": "go to the beach",
+      "date": "2021-07-22"
+    }
+  ]
+}

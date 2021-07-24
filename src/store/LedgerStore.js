@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import data from "../../data.json";
 
 Vue.use(Vuex);
 
@@ -20,25 +21,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchMoneyData({ commit }) {
-      const res = {
-        data: [
-          {
-            name: "Jackpot",
-            amount: 300,
-            type: "Income",
-            description: "",
-            date: "2021-07-22",
-          },
-          {
-            name: "eating",
-            amount: 100,
-            type: "Expense",
-            description: "eating breakfast",
-            date: "2021-07-22",
-          },
-        ],
-      };
-
+      const res = data;
       commit("fetch", { res });
     },
     addMoneyData({ commit }, newData) {

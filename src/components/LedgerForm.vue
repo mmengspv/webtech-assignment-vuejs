@@ -2,32 +2,40 @@
   <div>
     <form>
       <div>
-        <span>
+        <span class="padding">
           <label>ชื่อการออม-ใช้จ่าย: </label>
-          <input type="text" class="border" v-model="form.name" />
+          <input type="text" class="input-style" v-model="form.name" />
+        </span>
+        <span class="padding">
+          <label>จำนวนเงิน: </label>
+          <input type="number" class="input-style" v-model="form.amount" />
         </span>
         <span>
-          <label>จำนวนเงิน: </label>
-          <input type="number" class="border" v-model="form.amount" />
+          <select class="input-style" v-model="form.type" id="type" required>
+            <option value="" disabled>Please select Income or Expense</option>
+            <option>Income</option>
+            <option>Expense</option>
+          </select>
         </span>
       </div>
       <div>
-        <span>
+        <span class="padding">
           <label>Description: </label>
-          <input type="text" class="border" v-model="form.description" />
+          <input type="text" class="input-style" v-model="form.description" />
         </span>
         <span>
           <label>Date: </label>
-          <input type="date" class="border" v-model="form.date" />
+          <input type="date" class="input-style" v-model="form.date" />
         </span>
       </div>
     </form>
-    <button class="border" @click="addDataForm">Add data</button>
+    <v-btn color="brown white--text" @click="addDataForm">Add data</v-btn>
   </div>
 </template>
 
 <script>
 import LedgerStore from "../store/LedgerStore";
+
 export default {
   data() {
     return {
@@ -41,6 +49,7 @@ export default {
         description: "",
         date: "",
       },
+      checkEmpty: "",
     };
   },
   methods: {
@@ -52,8 +61,24 @@ export default {
         description: this.form.description,
         date: this.form.date,
       };
-
+      if (
+        this.form.type === "" ||
+        this.form.date === "" ||
+        this.form.name === ""
+      ) {
+        return alert("Please complete the information.");
+      }
       LedgerStore.dispatch("addMoneyData", newData);
+      this.clearForm();
+    },
+    clearForm() {
+      this.form = {
+        name: "",
+        amount: 0,
+        type: "",
+        description: "",
+        date: "",
+      };
     },
   },
 };
@@ -63,12 +88,21 @@ export default {
 div {
   margin: 20px;
 }
-span {
+.padding {
   padding: 10px;
 }
-.border {
+.input-style {
+  background-color: white;
   border-width: 1px;
   border-style: solid;
   border-color: black;
+  margin: 5px;
+  padding: 5px;
+}
+p.test {
+  font-weight: bold;
+}
+.v-text-field {
+  width: 250px;
 }
 </style>
